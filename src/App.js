@@ -5,11 +5,12 @@ import Login from "./component/Login";
 import Main from "./component/main";
 import Goods from "./component/goods";
 import MyPage from "./component/myPage";
-import NewMember from "./component/newMember";
 import ShoppingBasket from "./component/shoppingBasket";
 import Likelist from "./component/likelist";
 import Join from "./component/Join";
 import JoinOk from "./component/JoinOk";
+import EventPage from "./component/eventPage";
+import Footer from "./component/footer";
 
 function App() {
   return (
@@ -20,11 +21,12 @@ function App() {
           <Route path = "/Login" element = {<Login/>}/>
           <Route path = "/goods" element = {<Goods/>}/>
           <Route path = "/mypage" element = {<MyPage/>}/>
-          <Route path = "/newMember" element = {<NewMember/>}/>
           <Route path = "/ShoppingBasket" element = {<ShoppingBasket/>}/>
           <Route path = "/LikeList" element = {<Likelist/>}/>
           <Route path = "/Join" element ={<Join/>}/>
           <Route path = "/JoinOk" element = {<JoinOk/>}/>
+          <Route path="/EventPage" element = {<EventPage/>}/>
+          <Route path="/Footer" element = {<Footer/>}/>
         </Routes>
       </BrowserRouter>
     </div>
