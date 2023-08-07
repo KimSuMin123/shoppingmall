@@ -7,8 +7,8 @@ function Header() {
   const [searchQuery, setSearchQuery] = useState(""); // 검색어를 담을 상태 변수
 
   const handleSearch = () => {
-    // 검색 결과 페이지를 "/search"로 가정합니다.
-    navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
+    // 검색 결과 페이지를 "/ProductDetail"로 가정하고 검색어를 쿼리 파라미터로 전달합니다.
+    navigate(`/ProductDetail?q=${encodeURIComponent(searchQuery)}`);
   };
   const handlemain = () => {
     navigate("/");
@@ -25,7 +25,10 @@ function Header() {
   const handlemypage = () => {
     navigate("/mypage");
   };
-
+  const handleCategory = () => {
+    navigate("/Category");
+  };
+  
   const handleShoppingBasket = () => {
     navigate("/ShoppingBasket");
   };
@@ -56,11 +59,14 @@ function Header() {
         type="text"
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
-        placeholder="검색"e
+        placeholder="검색"
       />
       <button onClick={handleSearch}>검색</button>
       <button id="Headerbuttonone" onClick={handlegoods}>
         상품
+      </button>
+      <button id="Headerbuttontwo" onClick={handleCategory}>
+        카테고리 검색
       </button>
       <button id="Headerbuttontwo" onClick={handlemypage}>
         마이페이지
@@ -87,3 +93,4 @@ function Header() {
 }
 
 export default Header;
+

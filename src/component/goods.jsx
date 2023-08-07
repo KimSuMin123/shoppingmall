@@ -6,11 +6,13 @@ import TopBanner from "../img/TopBanner.PNG";
 import SecondBanner from "../img/SecondBanner.PNG";
 import Header from "./header";
 import Footer from "./footer";
+import Category from "./Category";
 
 function Goods() {
   const [userId, setUserId] = useState("");
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [sortOrder, setSortOrder] = useState(""); // 추가: 정렬 방식 상태
 
   useEffect(() => {
     // 로컬 스토리지에서 UserId 가져오기
@@ -22,7 +24,11 @@ function Goods() {
     // 상품 데이터 가져오기
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('http://43.202.83.222:8080/product/priceSort');
+        let url = 'http://43.202.83.222:8080/product/listProduct';
+        if (sortOrder) {
+          url = `http://43.202.83.222:8080/product/priceSort?sort=${sortOrder}`;
+        }
+        const response = await axios.get(url);
         setProducts(response.data);
         setLoading(false);
       } catch (error) {
@@ -32,17 +38,26 @@ function Goods() {
     };
 
     fetchProducts();
-  }, []);
+  }, [sortOrder]);
+
+  // 정렬 방식 변경 핸들러
+  const handleSortOrderChange = (e) => {
+    setSortOrder(e.target.value);
+  };
 
   return (
     <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
       <Header />
       <div>
-        <h1>카테고리</h1>
-        <p>옷 셔츠 바지</p>
-      </div>
-      <div>
         <h1>랭킹</h1>
+        {/* 드롭다운 버튼 추가 */}
+        <div>
+          <select onChange={handleSortOrderChange}>
+            <option value="">정렬 선택</option>
+            <option value="내림차순">내림차순</option>
+            <option value="오름차순">오름차순</option>
+          </select>
+        </div>
         <div style={{ display: "flex", flexWrap: "wrap" }}>
           {loading ? (
             <div>로딩중...</div>
@@ -107,4 +122,3 @@ function Goods() {
 }
 
 export default Goods;
-
