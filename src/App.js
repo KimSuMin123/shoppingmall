@@ -13,6 +13,7 @@ import EventPage from "./component/eventPage";
 import Footer from "./component/footer";
 import ProductDetail from "./component/productDetail";
 import Category from "./component/Category";
+import GoodsDetail from "./component/goodDetail";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="/Footer" element = {<Footer/>}/>
           <Route path="/ProductDetail" element ={<ProductDetail/>}/>
           <Route path="/Category" element = {<Category/>}/>
+          <Route path="/GoodsDetail" element = {<GoodsDetail/>}/>
         </Routes>
       </BrowserRouter>
     </div>

@@ -1,18 +1,15 @@
-import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import TopBanner from "../img/TopBanner.PNG";
-import SecondBanner from "../img/SecondBanner.PNG";
-import Header from "./header";
+import Header from './header';
 import Footer from "./footer";
-import Category from "./Category";
+import { useNavigate } from 'react-router-dom';
 
 function Goods() {
   const [userId, setUserId] = useState("");
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [sortOrder, setSortOrder] = useState(""); // 추가: 정렬 방식 상태
+  const navigate = useNavigate(); // navigate 함수 사용 준비
 
   useEffect(() => {
     // 로컬 스토리지에서 UserId 가져오기
@@ -45,6 +42,11 @@ function Goods() {
     setSortOrder(e.target.value);
   };
 
+  // 상품 디테일 페이지로 이동하는 함수
+  const goToProductDetail = (productId) => {
+    navigate(`/GoodsDetail/${productId}`);
+  };
+
   return (
     <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
       <Header />
@@ -64,11 +66,14 @@ function Goods() {
           ) : (
             products.map((product) => (
               <div key={product.id} style={{ margin: "10px", textAlign: "center" }}>
-                <img
-                  src={product.url}
-                  alt={product.name}
-                  style={{ width: '200px', height: '350px' }}
-                />
+                {/* 상품 디테일 페이지로 이동하는 함수 호출 */}
+                <div onClick={() => goToProductDetail(product.id)}>
+                  <img
+                    src={product.url}
+                    alt={product.name}
+                    style={{ width: '200px', height: '350px', cursor: 'pointer' }}
+                  />
+                </div>
                 <div>{product.productName}</div>
                 <div>{product.price}원</div>
               </div>
@@ -104,11 +109,14 @@ function Goods() {
           ) : (
             products.map((product) => (
               <div key={product.id} style={{ margin: "10px", textAlign: "center" }}>
-                <img
-                  src={product.url}
-                  alt={product.name}
-                  style={{ width: '200px', height: '350px' }}
-                />
+                {/* 상품 디테일 페이지로 이동하는 함수 호출 */}
+                <div onClick={() => goToProductDetail(product.id)}>
+                  <img
+                    src={product.url}
+                    alt={product.name}
+                    style={{ width: '200px', height: '350px', cursor: 'pointer' }}
+                  />
+                </div>
                 <div>{product.productName}</div>
                 <div>{product.price}원</div>
               </div>
